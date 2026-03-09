@@ -1,4 +1,47 @@
-/* ===== main.js - Portfolio Interactivity ===== */
+// ===== SCROLL PROGRESS BAR + NAVBAR SCROLL EFFECT =====
+(function initScrollEffects() {
+  const navbar = document.getElementById('navbar');
+  const progressBar = document.getElementById('progress-bar');
+
+  window.addEventListener('scroll', () => {
+    // Navbar style
+    if (window.scrollY > 50) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+
+    // Progress bar
+    if (progressBar) {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = pct + '%';
+    }
+
+    updateActiveLink();
+  });
+})();
+
+
+// ===== THEME TOGGLE =====
+(function initThemeToggle() {
+  const btn = document.getElementById('theme-toggle');
+  const html = document.documentElement;
+
+  // Apply saved theme (also done inline in <head> to prevent flash)
+  if (localStorage.getItem('theme') === 'light') {
+    html.classList.add('light-mode');
+  }
+
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    html.classList.toggle('light-mode');
+    const isLight = html.classList.contains('light-mode');
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  });
+})();
+
 
 // ===== PARTICLE BACKGROUND =====
 (function initParticles() {

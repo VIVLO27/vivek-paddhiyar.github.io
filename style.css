@@ -998,3 +998,171 @@ footer {
   .skills-grid { grid-template-columns: 1fr; }
   .soft-skills { gap: 1rem; }
 }
+
+/* ===== SCROLL PROGRESS BAR ===== */
+#progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent-purple), var(--accent-cyan), var(--accent-pink));
+  z-index: 9999;
+  border-radius: 0 3px 3px 0;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.6), 0 0 20px rgba(0, 242, 255, 0.3);
+}
+
+/* ===== THEME TOGGLE BUTTON ===== */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+.theme-toggle:hover {
+  background: rgba(139, 92, 246, 0.2);
+  border-color: var(--accent-purple);
+  transform: rotate(20deg) scale(1.1);
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+}
+/* Show sun icon in dark mode, moon in light mode */
+.theme-toggle .sun-icon  { display: block; }
+.theme-toggle .moon-icon { display: none; }
+.light-mode .theme-toggle .sun-icon  { display: none; }
+.light-mode .theme-toggle .moon-icon { display: block; }
+
+/* Smooth theme transition on all elements */
+*, *::before, *::after {
+  transition: background-color 0.35s ease, color 0.35s ease,
+              border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* ===== LIGHT MODE ===== */
+.light-mode {
+  --bg-primary: #f0f4ff;
+  --bg-secondary: #e4eaf8;
+  --bg-card: rgba(255, 255, 255, 0.75);
+  --text-primary: #0f0a1e;
+  --text-muted: #4a4a6a;
+  --border-color: rgba(109, 40, 217, 0.2);
+}
+
+/* Light mode body */
+.light-mode body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* Light mode canvas — subtle particles */
+.light-mode #particle-canvas { opacity: 0.35; }
+
+/* Light mode navbar */
+.light-mode #navbar.scrolled {
+  background: rgba(240, 244, 255, 0.9);
+  border-bottom-color: rgba(109, 40, 217, 0.12);
+}
+
+/* Light mode glass cards */
+.light-mode .glass-card {
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(109, 40, 217, 0.15);
+  box-shadow: 0 4px 24px rgba(109, 40, 217, 0.07);
+}
+.light-mode .glass-card:hover {
+  border-color: rgba(109, 40, 217, 0.35);
+  box-shadow: 0 8px 32px rgba(109, 40, 217, 0.12);
+}
+
+/* Light mode nav links */
+.light-mode .nav-link { color: #4a4a6a; }
+.light-mode .nav-link:hover,
+.light-mode .nav-link.active { color: #0f0a1e; background: rgba(109, 40, 217, 0.08); }
+
+/* Light mode scrollbar */
+.light-mode ::-webkit-scrollbar-track { background: #e4eaf8; }
+.light-mode ::-webkit-scrollbar-thumb { background: #b8a8e8; }
+
+/* Light mode hero sections */
+.light-mode #about    { background: radial-gradient(ellipse at 80% 50%, rgba(139,92,246,0.06) 0%, transparent 60%); }
+.light-mode #experience { background: radial-gradient(ellipse at 20% 50%, rgba(0,180,255,0.05) 0%, transparent 60%); }
+.light-mode #projects { background: radial-gradient(ellipse at 70% 70%, rgba(236,72,153,0.05) 0%, transparent 60%); }
+.light-mode #skills   { background: radial-gradient(ellipse at 30% 50%, rgba(139,92,246,0.06) 0%, transparent 55%); }
+.light-mode #contact  { background: radial-gradient(ellipse at 50% 100%, rgba(139,92,246,0.07) 0%, transparent 60%); }
+
+/* Light mode avatar */
+.light-mode .hero-avatar {
+  border-color: rgba(109, 40, 217, 0.5);
+  box-shadow: 0 0 40px rgba(109, 40, 217, 0.2), 0 0 80px rgba(0, 180, 255, 0.08);
+}
+.light-mode .avatar-glow {
+  background: radial-gradient(circle, rgba(109, 40, 217, 0.15) 0%, transparent 65%);
+}
+
+/* Light mode floating badges */
+.light-mode .floating-badge {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(109, 40, 217, 0.25);
+}
+
+/* Light mode btn-outline */
+.light-mode .btn-outline {
+  color: var(--text-primary);
+  border-color: rgba(109, 40, 217, 0.4);
+}
+.light-mode .btn-outline:hover { background: rgba(109, 40, 217, 0.08); }
+
+/* Light mode project tech box */
+.light-mode .project-tech-section { background: rgba(109, 40, 217, 0.04); }
+
+/* Light mode contact items */
+.light-mode .contact-item {
+  background: rgba(109, 40, 217, 0.04);
+  border-color: rgba(109, 40, 217, 0.1);
+}
+.light-mode .contact-item:hover {
+  background: rgba(109, 40, 217, 0.08);
+  border-color: rgba(109, 40, 217, 0.25);
+}
+
+/* Light mode form input */
+.light-mode .form-input {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(109, 40, 217, 0.2);
+  color: #0f0a1e;
+}
+.light-mode .form-input::placeholder { color: rgba(74, 74, 106, 0.5); }
+.light-mode .form-input:focus {
+  border-color: var(--accent-purple);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+}
+
+/* Light mode footer */
+.light-mode footer { border-top-color: rgba(109, 40, 217, 0.12); }
+
+/* Light mode mobile sidebar */
+.light-mode .nav-links.mobile-open {
+  background: rgba(240, 244, 255, 0.97);
+  border-bottom-color: rgba(109, 40, 217, 0.12);
+}
+
+/* Light mode timeline dot border */
+.light-mode .timeline-dot { border-color: var(--bg-primary); }
+
+/* Light mode theme toggle */
+.light-mode .theme-toggle {
+  background: rgba(109, 40, 217, 0.08);
+  border-color: rgba(109, 40, 217, 0.25);
+  color: #0f0a1e;
+}
+.light-mode .theme-toggle:hover {
+  background: rgba(109, 40, 217, 0.15);
+}
