@@ -260,7 +260,7 @@ function updateActiveLink() {
     btn.disabled = true;
 
     try {
-      const response = await fetch('https://formspree.io/f/xlglqqlw', {
+      const response = await fetch('https://formspree.io/f/xyknkwlv', {
         method: 'POST',
         body: new FormData(form),
         headers: { 'Accept': 'application/json' }
