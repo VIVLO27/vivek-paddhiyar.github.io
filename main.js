@@ -245,29 +245,44 @@ function updateActiveLink() {
 })();
 
 
-// ===== CONTACT FORM =====
+// ===== CONTACT FORM (Formspree) =====
 (function initContactForm() {
   const form = document.getElementById('contact-form');
   const success = document.getElementById('form-success');
   if (!form) return;
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = form.querySelector('button[type="submit"]');
-    btn.textContent = 'Sending...';
+    const originalHTML = btn.innerHTML;
+
+    btn.innerHTML = '<span>Sending...</span>';
     btn.disabled = true;
-    setTimeout(() => {
-      btn.textContent = 'Message Sent ✓';
-      if (success) {
-        success.style.display = 'block';
-      }
-      setTimeout(() => {
-        btn.innerHTML = '<span>Send Message</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>';
-        btn.disabled = false;
+
+    try {
+      const response = await fetch('https://formspree.io/f/xlglqqlw', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        btn.innerHTML = '<span>✓ Message Sent!</span>';
+        if (success) success.style.display = 'block';
         form.reset();
-        if (success) success.style.display = 'none';
-      }, 3500);
-    }, 1200);
+        setTimeout(() => {
+          btn.innerHTML = originalHTML;
+          btn.disabled = false;
+          if (success) success.style.display = 'none';
+        }, 4000);
+      } else {
+        throw new Error('Server error');
+      }
+    } catch (err) {
+      btn.innerHTML = '<span>❌ Failed — try email instead</span>';
+      btn.disabled = false;
+      setTimeout(() => { btn.innerHTML = originalHTML; }, 3000);
+    }
   });
 })();
 
