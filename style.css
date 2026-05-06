@@ -657,7 +657,7 @@ section {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(480px, 100%), 1fr));
   gap: 1.5rem;
 }
 .project-card {
@@ -726,6 +726,40 @@ section {
 .tech-label { color: var(--accent-purple); font-weight: 600; min-width: 70px; flex-shrink: 0; }
 .tech-value { color: var(--text-muted); }
 .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+/* Featured / Live project cards */
+.project-featured {
+  position: relative;
+  border-color: rgba(139, 92, 246, 0.35) !important;
+  background: rgba(15, 8, 26, 0.7) !important;
+  box-shadow: 0 0 0 1px rgba(139, 92, 246, 0.15), 0 8px 40px rgba(139, 92, 246, 0.12);
+}
+.project-featured:hover {
+  border-color: rgba(0, 242, 255, 0.5) !important;
+  box-shadow: 0 0 0 1px rgba(0, 242, 255, 0.2), 0 20px 60px rgba(139, 92, 246, 0.25) !important;
+}
+.project-featured-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.65rem;
+  border-radius: 20px;
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  color: #4ade80;
+  animation: badge-pulse 2s ease-in-out infinite;
+}
+@keyframes badge-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.35); }
+  50% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+}
 
 /* ===== SKILLS SECTION ===== */
 #skills { background: radial-gradient(ellipse at 30% 50%, rgba(139, 92, 246, 0.04) 0%, transparent 55%); }
@@ -951,11 +985,14 @@ footer {
 }
 
 /* ===== RESPONSIVE ===== */
+
+/* --- Tablet (≤ 900px) --- */
 @media (max-width: 900px) {
   .hero-container {
     grid-template-columns: 1fr;
     text-align: center;
-    gap: 3rem;
+    gap: 2.5rem;
+    padding: 0 1.5rem;
   }
   .hero-greeting, .hero-actions, .hero-socials { justify-content: center; }
   .hero-bio { margin: 0 auto 2rem; }
@@ -964,17 +1001,24 @@ footer {
   .ring-2 { width: 360px; height: 360px; margin: -180px 0 0 -180px; }
   .ring-3 { width: 440px; height: 440px; margin: -220px 0 0 -220px; }
   .hero-avatar { width: 220px; height: 220px; }
-  .badge-1 { right: 5%; }
-  .badge-2 { left: 5%; }
-  .badge-3 { left: 5%; }
+  .badge-1 { right: 5%; top: 10%; }
+  .badge-2 { left: 2%; bottom: 12%; }
+  .badge-3 { left: 2%; top: 30%; }
   .about-grid { grid-template-columns: 1fr; }
-  .timeline-grid { grid-template-columns: 1fr; }
+  .timeline-grid { grid-template-columns: 1fr; gap: 2rem; }
   .projects-grid { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; }
+  .skills-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
+/* --- Mobile (≤ 640px) --- */
 @media (max-width: 640px) {
-  section { padding: 5rem 0; }
+  :root { --nav-height: 64px; }
+  section { padding: 4.5rem 0; }
+  .container { padding: 0 1rem; }
+
+  /* Nav */
+  .nav-container { padding: 0 1rem; gap: 0.75rem; }
   .nav-links { display: none; }
   .nav-links.mobile-open {
     display: flex;
@@ -983,20 +1027,89 @@ footer {
     top: var(--nav-height);
     left: 0;
     right: 0;
-    background: rgba(5, 2, 10, 0.95);
+    background: rgba(5, 2, 10, 0.97);
     backdrop-filter: blur(20px);
-    padding: 1rem;
+    padding: 1rem 1.25rem;
     border-bottom: 1px solid rgba(139, 92, 246, 0.15);
     z-index: 999;
+    gap: 0.25rem;
   }
+  .nav-link { padding: 0.65rem 1rem; font-size: 1rem; }
   .hamburger { display: flex; }
   .nav-cta { display: none; }
-  .hero-avatar { width: 180px; height: 180px; }
+
+  /* Hero */
+  .hero-container { gap: 2rem; padding: 0 1rem; }
+  .hero-name { font-size: clamp(2.4rem, 11vw, 3.5rem); letter-spacing: -0.5px; }
+  .hero-role { font-size: 1rem; }
+  .hero-bio { font-size: 0.9rem; }
+  .hero-actions { flex-direction: column; gap: 0.75rem; }
+  .hero-actions .btn { width: 100%; justify-content: center; }
+  .hero-avatar { width: 160px; height: 160px; }
   .floating-badge { display: none; }
   .orbit-ring { display: none; }
-  .about-stats { flex-direction: column; gap: 1rem; }
-  .skills-grid { grid-template-columns: 1fr; }
-  .soft-skills { gap: 1rem; }
+
+  /* Section headings */
+  .section-title { font-size: clamp(1.6rem, 7vw, 2.2rem); }
+
+  /* About */
+  .about-card { padding: 1.5rem; }
+  .about-stats { flex-direction: column; gap: 0.75rem; }
+  .about-stats .stat-item { border-bottom: 1px solid rgba(139,92,246,0.1); padding-bottom: 0.75rem; }
+  .about-stats .stat-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .stat-number { font-size: 1.6rem; }
+  .about-info-cards { gap: 0.75rem; }
+  .info-card { padding: 0.85rem 1rem; }
+
+  /* Timeline */
+  .timeline-col-title { font-size: 1rem; }
+  .timeline { padding-left: 1.25rem; }
+  .timeline-content { padding: 1.15rem; }
+  .tl-title { font-size: 0.95rem; }
+  .tl-points li { font-size: 0.82rem; }
+
+  /* Projects */
+  .projects-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .project-card { padding: 1.25rem; }
+  .project-icon { font-size: 2rem; }
+  .project-title { font-size: 1.15rem; }
+  .project-desc { font-size: 0.85rem; }
+  .project-tech-section { padding: 0.6rem 0.75rem; }
+  .tech-row { font-size: 0.78rem; flex-wrap: wrap; }
+  .tech-label { min-width: 65px; }
+  .project-featured-badge { font-size: 0.65rem; padding: 0.2rem 0.5rem; top: 0.75rem; right: 0.75rem; }
+
+  /* Skills */
+  .skills-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .skill-category { padding: 1.25rem; }
+  .skill-pill { font-size: 0.78rem; padding: 0.28rem 0.7rem; }
+  .soft-skills { gap: 0.75rem; }
+  .soft-skill { font-size: 0.85rem; }
+
+  /* Contact */
+  .contact-info { padding: 1.5rem; }
+  .contact-form { padding: 1.5rem; }
+  .contact-heading { font-size: 1.3rem; }
+  .contact-desc { font-size: 0.875rem; }
+  .contact-item { padding: 0.85rem; gap: 0.75rem; }
+  .contact-item-icon { width: 38px; height: 38px; font-size: 0.9rem; }
+  .contact-item-value { font-size: 0.82rem; }
+
+  /* Footer */
+  footer { padding: 1.75rem 0; }
+  .footer-text { font-size: 0.82rem; }
+}
+
+/* --- Small phones (≤ 420px) --- */
+@media (max-width: 420px) {
+  .hero-avatar { width: 140px; height: 140px; }
+  .hero-name { font-size: 2.2rem; }
+  .hero-socials { gap: 0.5rem; }
+  .social-link { width: 38px; height: 38px; }
+  .project-card { padding: 1rem; }
+  .project-title { font-size: 1.05rem; }
+  .floating-badge { display: none; }
+  .tech-label { min-width: 58px; }
 }
 
 /* ===== SCROLL PROGRESS BAR ===== */
