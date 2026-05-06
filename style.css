@@ -1164,14 +1164,38 @@ footer {
   --bg-primary: #f0f4ff;
   --bg-secondary: #e4eaf8;
   --bg-card: rgba(255, 255, 255, 0.75);
-  --text-primary: #0f0a1e;
-  --text-muted: #4a4a6a;
+  --text-primary: #000000; /* Darker primary text */
+  --text-muted: #333333; /* Darker muted text */
   --border-color: rgba(109, 40, 217, 0.2);
 }
 
-/* Light mode body */
-.light-mode body {
-  background-color: var(--bg-primary);
+/* Light mode body and text elements */
+.light-mode body,
+.light-mode p,
+.light-mode .project-desc,
+.light-mode .tl-points li,
+.light-mode .tech-value,
+.light-mode .about-text p,
+.light-mode .contact-desc,
+.light-mode .hero-bio,
+.light-mode .footer-text {
+  color: var(--text-muted);
+}
+.light-mode h1,
+.light-mode h2,
+.light-mode h3,
+.light-mode h4,
+.light-mode h5,
+.light-mode h6,
+.light-mode strong,
+.light-mode .nav-logo,
+.light-mode .section-title,
+.light-mode .project-title,
+.light-mode .stat-number,
+.light-mode .info-value,
+.light-mode .tl-title,
+.light-mode .contact-heading,
+.light-mode .contact-item-value {
   color: var(--text-primary);
 }
 
