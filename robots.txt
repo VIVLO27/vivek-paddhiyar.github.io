@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /node_modules/
+Disallow: /dist/
+Disallow: /.github/
+
+# Sitemaps
+Sitemap: https://vivek-paddhiyar.github.io/sitemap.xml
