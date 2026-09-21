@@ -11,34 +11,6 @@ Welcome to my portfolio website. This project showcases my work in full stack we
 - SEO optimized for search engine visibility
 - Fast performance and accessibility
 
-### Technologies Used
-
-- **Frontend**: TypeScript, React, HTML5, CSS3
-- **Build Tools**: Vite
-- **Hosting**: GitHub Pages
-
-### Getting Started
-
-Clone the repository and install dependencies:
-
-```bash
-git clone https://github.com/VIVLO27/vivek-paddhiyar.github.io.git
-cd vivek-paddhiyar.github.io
-npm install
-```
-
-Run the development server:
-
-```bash
-npm run dev
-```
-
-Build for production:
-
-```bash
-npm run build
-```
-
 ### SEO Configuration
 
 This website is configured with:
